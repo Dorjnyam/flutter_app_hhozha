@@ -19,27 +19,22 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
   final AuthService _authService = AuthService();
 
-  // Function to handle user login
   Future<void> _handleLogin() async {
     if (_formKey.currentState?.validate() ?? false) {
       String email = _emailController.text.trim();
       String password = _passwordController.text;
 
       try {
-        // Attempt login with the provided email and password
         final response = await _authService.loginUser({
           'email': email,
           'password': password,
         });
 
-        // Get the JWT token and userId from the response
         String token = response['token'];
         String userId = response['userId'].toString();
 
-        // Store token and userId
         await _authService.storeUserData(userId, token);
 
-        // If login is successful, store token and other details if "Remember Me" is checked
         SharedPreferences prefs = await SharedPreferences.getInstance();
         if (_rememberMe) {
           await prefs.setBool('rememberMe', true);
@@ -49,14 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
           await prefs.remove('email');
         }
 
-        await prefs.setString('token', token); // Store JWT token
-        await prefs.setString('userId', userId); // Store userId
+        await prefs.setString('token', token);
+        await prefs.setString('userId', userId);
 
-        // Navigate to the home screen
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text(AppStrings.loginSuccess)), // Use loginSuccess
+            const SnackBar(content: Text(AppStrings.loginSuccess)),
           );
 
           Navigator.pushReplacement(
@@ -65,21 +58,17 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } catch (e) {
-        setState(() {
-          // Stop loading in case of an error
-        });
+        setState(() {});
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text(AppStrings.loginError)), // Use loginError
+            const SnackBar(content: Text(AppStrings.loginError)),
           );
         }
       }
     }
   }
 
-  // Function to handle password reset
   Future<void> _handlePasswordReset() async {
     String email = _emailController.text.trim();
 
@@ -95,22 +84,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(AppStrings
-                  .passwordResetEmailSent)), // Use passwordResetEmailSent
+          const SnackBar(content: Text(AppStrings.passwordResetEmailSent)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(AppStrings.generalError)), // Use generalError
+          const SnackBar(content: Text(AppStrings.generalError)),
         );
       }
     }
   }
 
-  // Load Remember Me settings from SharedPreferences
   Future<void> _loadRememberMe() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool rememberMe = prefs.getBool('rememberMe') ?? false;
@@ -215,12 +200,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings
-                              .passwordRequired; // Use passwordRequired
+                          return AppStrings.passwordRequired;
                         }
                         if (value.length < 6) {
-                          return AppStrings
-                              .passwordLength; // Use passwordLength
+                          return AppStrings.passwordLength;
                         }
                         return null;
                       },

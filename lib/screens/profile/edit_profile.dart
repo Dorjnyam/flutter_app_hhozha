@@ -30,10 +30,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   String? _photoUrl;
 
   final ImagePicker _picker = ImagePicker();
-  bool _isUploading = false; // For showing a loading indicator
+  bool _isUploading = false;
 
-  static const String _imgbbApiKey =
-      'a80bde7826f42077ff2761a732341126'; // Replace with your ImgBB API key
+  static const String _imgbbApiKey = 'a80bde7826f42077ff2761a732341126';
   static const String _imgbbApiUrl = 'https://api.imgbb.com/1/upload';
 
   @override
@@ -44,21 +43,19 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     _photoUrl = widget.initialPhotoUrl;
   }
 
-  // Function to pick a new image and upload it to ImgBB
   Future<void> _pickImage() async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
-        _isUploading = true; // Show loading indicator during upload
+        _isUploading = true;
       });
 
       try {
         final uploadedUrl = await _uploadImageToImgBB(File(pickedFile.path));
         setState(() {
-          _photoUrl =
-              uploadedUrl; // Update the photo URL after successful upload
+          _photoUrl = uploadedUrl;
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -73,13 +70,12 @@ class EditProfileScreenState extends State<EditProfileScreen> {
         }
       } finally {
         setState(() {
-          _isUploading = false; // Hide loading indicator after upload
+          _isUploading = false;
         });
       }
     }
   }
 
-  // Function to upload an image to ImgBB
   Future<String> _uploadImageToImgBB(File imageFile) async {
     final request = http.MultipartRequest(
         'POST', Uri.parse('$_imgbbApiUrl?key=$_imgbbApiKey'));
@@ -91,13 +87,12 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     if (response.statusCode == 200) {
       final responseBody = await response.stream.bytesToString();
       final jsonResponse = json.decode(responseBody);
-      return jsonResponse['data']['url']; // Return the uploaded image URL
+      return jsonResponse['data']['url'];
     } else {
       throw Exception('Failed to upload image: ${response.statusCode}');
     }
   }
 
-  // Function to update the user profile
   Future<void> _updateUserProfile(String userId, String token) async {
     final url = Uri.parse('http://192.168.15.107:3000/users/update/1');
     final updatedData = {
@@ -124,8 +119,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
           );
         }
         if (mounted) {
-          Navigator.pop(
-              context, responseBody['user']); // Return updated user data
+          Navigator.pop(context, responseBody['user']);
         }
       } else {
         throw Exception('Failed to update user profile: ${response.body}');

@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/api_constants.dart';
 
 class AuthService {
-  // Login the user and return the token
   Future<Map<String, dynamic>> loginUser(Map<String, dynamic> userData) async {
     final url = Uri.parse(ApiConstants.baseUrl + ApiConstants.apiLogin);
 
@@ -25,7 +24,6 @@ class AuthService {
     }
   }
 
-  // Register a new user
   Future<Map<String, dynamic>> registerUser(
       Map<String, dynamic> userData) async {
     final url = Uri.parse(ApiConstants.baseUrl + ApiConstants.apiRegister);
@@ -47,7 +45,6 @@ class AuthService {
     }
   }
 
-// Reset the user's password
   Future<void> resetPassword(String email) async {
     final url = Uri.parse(ApiConstants.baseUrl + ApiConstants.apiResetPassword);
     try {
@@ -65,14 +62,12 @@ class AuthService {
     }
   }
 
-  // Store the user's login token and other necessary data
   Future<void> storeUserData(String userId, String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('userId', userId);
     await prefs.setString('token', token);
   }
 
-  // Get stored user data (userId and token) from SharedPreferences
   Future<Map<String, String?>> getStoredUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('userId');
@@ -85,14 +80,12 @@ class AuthService {
     return {'userId': userId, 'token': token};
   }
 
-  // Logout the user by clearing stored data
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('userId');
     await prefs.remove('token');
   }
 
-  // Check if the user is logged in
   Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('userId');

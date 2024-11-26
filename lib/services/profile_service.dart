@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/api_constants.dart';
 
 class ProfileService {
-  // Fetch user profile by ID
   Future<Map<String, dynamic>> getUserProfile(
       String userId, String token) async {
     final url = Uri.parse(
@@ -24,7 +23,6 @@ class ProfileService {
     }
   }
 
-  // Update user profile (first name, last name, photo URL)
   Future<Map<String, dynamic>> updateUserProfile(
       String userId, String token, Map<String, dynamic> updatedData) async {
     final url = Uri.parse(
@@ -45,7 +43,6 @@ class ProfileService {
     }
   }
 
-  // Fetch and store user ID and token from SharedPreferences
   Future<Map<String, String>> getUserData() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');

@@ -94,7 +94,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      // Fetch userId and token from SharedPreferences
                       final prefs = await SharedPreferences.getInstance();
                       final userId = prefs.getString('userId');
                       final token = prefs.getString('token');

@@ -65,16 +65,14 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       try {
-        final apiService = ApiService(); // Instance of the API service
+        final apiService = ApiService();
 
-        // Prepare the registration data
         final userData = {
           'username': _nameController.text,
           'email': _emailController.text,
           'password': _passwordController.text,
         };
 
-        // Send registration request
         await apiService.registerUser(userData);
 
         if (mounted) {
@@ -82,7 +80,6 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             const SnackBar(content: Text('Амжилттай бүртгүүллээ!')),
           );
 
-          // Navigate to the login screen
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const LoginScreen()),

@@ -36,7 +36,6 @@ class AppStrings {
   // Login-specific messages
   static const String loginTitleMessage = 'Тавтай морилно уу!';
   static const String rememberMeLabel = 'Remember Me';
-  static const String registerPrompt =
-      'Don\'t have an account?'; // Added string
+  static const String registerPrompt = 'Don\'t have an account?';
   static const String forgotPasswordLabel = 'Нууц үгээ мартсан уу?';
 }

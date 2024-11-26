@@ -34,8 +34,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(
-          response.body); // Return the token and any other user info if needed
+      return jsonDecode(response.body);
     } else {
       throw Exception('Failed to login user: ${response.body}');
     }
@@ -49,7 +48,7 @@ class ApiService {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // Send JWT token for authentication
+        'Authorization': 'Bearer $token',
       },
     );
 
@@ -68,7 +67,7 @@ class ApiService {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // Send JWT token for authentication
+        'Authorization': 'Bearer $token',
       },
       body: jsonEncode(transactionData),
     );
@@ -87,7 +86,7 @@ class ApiService {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // Send JWT token for authentication
+        'Authorization': 'Bearer $token',
       },
     );
 
@@ -108,7 +107,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body); // Handle response if needed
+      return jsonDecode(response.body);
     } else {
       throw Exception('Failed to reset password: ${response.body}');
     }
@@ -122,15 +121,13 @@ class ApiService {
       url,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // Send JWT token for authentication
+        'Authorization': 'Bearer $token',
       },
-      body: jsonEncode(
-          updatedData), // Send the updated data (first name, last name, etc.)
+      body: jsonEncode(updatedData),
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(
-          response.body); // Return updated user data if successful
+      return jsonDecode(response.body);
     } else {
       throw Exception('Failed to update user profile: ${response.body}');
     }
@@ -139,9 +136,8 @@ class ApiService {
   // Function to get user ID and token from SharedPreferences
   Future<Map<String, String?>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId =
-        prefs.getString('userId'); // Retrieve userId with key 'userId'
-    String? token = prefs.getString('token'); // Retrieve token with key 'token'
+    String? userId = prefs.getString('userId');
+    String? token = prefs.getString('token');
 
     return {'userId': userId, 'token': token};
   }
