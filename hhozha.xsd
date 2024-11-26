@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="module">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="component">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="exclude-output" />
+              <xs:element name="content">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="sourceFolder" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="url" use="required" />
+                        <xs:attribute name="isTestSource" type="xs:boolean" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="excludeFolder" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="url" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="url" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="orderEntry" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="type" use="required" />
+                  <xs:attribute name="forTests" type="xs:boolean" />
+                  <xs:attribute name="name" />
+                  <xs:attribute name="level" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" use="required" />
+            <xs:attribute name="inherit-compiler-output" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" />
+      <xs:attribute name="version" type="xs:integer" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
