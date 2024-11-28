@@ -3,9 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String baseUrl =
-      // 'http://192.168.15.122:3000';
-      'http://10.3.202.117:3000';
+  static const String baseUrl = 'http://10.3.203.120:3000';
+  // 'http://10.3.202.117:3000';
 
   // Register a new user
   Future<Map<String, dynamic>> registerUser(

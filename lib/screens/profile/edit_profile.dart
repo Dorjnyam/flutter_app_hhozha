@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import '../../constants/api_constants.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final String? initialFirstName;
@@ -94,7 +95,7 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Future<void> _updateUserProfile(String userId, String token) async {
-    final url = Uri.parse('http://192.168.15.107:3000/users/update/1');
+    final url = Uri.parse('${ApiConstants.baseUrl}/users/update/1');
     final updatedData = {
       'first_name': _firstNameController.text,
       'last_name': _lastNameController.text,
