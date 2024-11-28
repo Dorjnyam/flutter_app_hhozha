@@ -30,18 +30,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SafeArea(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(Icons.arrow_back, color: Colors.white),
-                        IconButton(
-                          icon: const Icon(Icons.notifications,
-                              color: Colors.white),
-                          onPressed: () {},
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Icon(Icons.arrow_back, color: Colors.white),
+                          IconButton(
+                            icon: const Icon(Icons.notifications,
+                                color: Colors.white),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 20),
                     const Text(
                       'Түрийвч',
                       style: TextStyle(
@@ -78,7 +80,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               _buildActionButton(Icons.add, 'Нэмэх'),
-                              _buildActionButton(Icons.attach_money, 'Төлөх'),
+                              _buildActionButton(Icons.qr_code, 'Төлөх'),
                               _buildActionButton(Icons.send, 'Илгээх'),
                             ],
                           ),
